@@ -1,6 +1,11 @@
 
 public class PascalTriangle {
-    public static long fact(long[] mas, int n) {
+    private long[] mas;
+    private int h;
+    private int len;
+    private boolean inited = false;
+
+    private long fact(long[] mas, int n) {
         if (n == 0)
             return 1;
         if (mas[n] == 0) {
@@ -11,7 +16,8 @@ public class PascalTriangle {
             return mas[n];
         }
     }
-    public static int calcLen (long tmp) {
+
+    private int calcLen (long tmp) {
         int len = 1;
         while (tmp > 0) {
             len++;
@@ -19,13 +25,14 @@ public class PascalTriangle {
         }
         return len;
     }
-    public static void start() {
-        System.out.println("Enter number (number <= 20):");
-        long[] mas = new long[1000];
-        mas[1] = 1;
-        int h = App.input.nextInt();
-        int len = calcLen(fact(mas, h) / fact(mas, h / 2) / fact(mas, h - (h / 2)));
 
+    private void init() {
+        inited = true;
+        mas = new long[1000];
+        mas[1] = 1;
+    }
+
+    private void printTriangle() {
         for (int i = 0; i <= h; i++) {
             for (int j = 0; j < (h - i) / 2; j++)
                 System.out.printf("%" + len + "s", "");
@@ -37,5 +44,15 @@ public class PascalTriangle {
             }
             System.out.println();
         }
+    }
+
+    public void start() {
+        if (inited == false) {
+            init();
+        }
+        System.out.println("Enter number (number <= 20):");
+        h = App.input.nextInt();
+        len = calcLen(fact(mas, h) / fact(mas, h / 2) / fact(mas, h - (h / 2)));
+        printTriangle();
     }
 }

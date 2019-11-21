@@ -1,12 +1,23 @@
 
 public class ReverseArray {
-    public static void printArray (int[] mas, int n) {
+
+    private int[]       mas;
+    private boolean     inited = false;
+    private int         n;
+
+    private void init() {
+        mas = new int[1000];
+        inited = true;
+    }
+
+    public void printArray (int[] mas, int n) {
         for (int i = 0; i < n; i++) {
-            System.out.print(mas[i]);
+            System.out.print(mas[i] + " ");
         }
         System.out.println();
     }
-    public static void reverseArray (int[] mas, int n) {
+
+    public void reverseArray (int[] mas, int n) {
         int tmp;
         for (int i = 0; i < n / 2; i++) {
             tmp = mas[i];
@@ -15,10 +26,12 @@ public class ReverseArray {
         }
     }
 
-    public static void start() {
-        int[] mas = new int[1000];
+    public void start() {
+        if (inited == false) {
+            init();
+        }
         System.out.println("Input number (0 < number < 1000). Then enter elements (int) of array");
-        int n = App.input.nextInt();
+        n = App.input.nextInt();
         for (int i = 0; i < n; i++) {
             mas[i] = App.input.nextInt();
         }
